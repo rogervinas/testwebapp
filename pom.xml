@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>rogervinas</groupId>
 	<artifactId>test-web-application</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>Test Web Application</name>
 	<description>
 		Test Web Application using com.sun.net.httpserver.HttpServer
@@ -16,7 +16,8 @@
 		<connection>scm:git:git@github.com:${github.repo}</connection>
 		<url>scm:git:git@github.com:${github.repo}</url>
 		<developerConnection>scm:git:git@github.com:${github.repo}</developerConnection>
-	</scm>
+	  <tag>test-web-application-0.0.1</tag>
+  </scm>
 	<distributionManagement>
 		<repository>
 			<!-- Dummy repository to use mvn release:perform, use Nexus or similar in a real project -->
