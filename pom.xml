@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>rogervinas</groupId>
 	<artifactId>test-web-application</artifactId>
@@ -10,17 +11,22 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<java.main.class>com.rogervinas.testwebapp.Main</java.main.class>
-		<github.repo>rogervinas/testwebapp</github.repo>
+		<github.repo>rogervinas/testwebapp</github.repo>		
+		<com.sun.net.httpserver.version>20070405</com.sun.net.httpserver.version>
+		<rxjava.version>1.0.17</rxjava.version>		
+		<junit.version>4.12</junit.version>
+		<apache.httpclient.version>4.5.1</apache.httpclient.version>
+		<slf4j.version>1.7.12</slf4j.version>
 	</properties>
 	<scm>
 		<connection>scm:git:git@github.com:${github.repo}</connection>
 		<url>scm:git:git@github.com:${github.repo}</url>
 		<developerConnection>scm:git:git@github.com:${github.repo}</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 	<distributionManagement>
 		<repository>
-			<!-- Dummy repository to use mvn release:perform, use Nexus or similar in a real project -->
+			<!-- Dummy repository to test mvn release:perform -->
 			<id>local-repository</id>
 			<url>file:///${project.build.directory}/repository</url>
 		</repository>
@@ -29,7 +35,29 @@
 		<dependency>
 			<groupId>com.sun.net.httpserver</groupId>
 			<artifactId>http</artifactId>
-			<version>20070405</version>
+			<version>${com.sun.net.httpserver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxjava</artifactId>
+			<version>${rxjava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${apache.httpclient.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
