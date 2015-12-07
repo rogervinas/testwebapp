@@ -16,14 +16,9 @@ public class SessionMapper implements Mapper
 	private static final Logger logger = LoggerFactory.getLogger(SessionMapper.class);
 	
 	private final Session sessionTmp;
-	private long sessionMaxAge = 60 * 60; 
 	
 	public SessionMapper(Session sessionTmp) {
 		this.sessionTmp = sessionTmp;
-	}
-	
-	public void setSessionMaxAge(long age) {
-		this.sessionMaxAge = age;
 	}
 	
 	@Override
@@ -38,7 +33,8 @@ public class SessionMapper implements Mapper
 					session.delete();
 					logger.info("session has expired " + session);
 				} else {
-					session.setMaxAge(sessionMaxAge);
+					session.resetCreationTime();
+					session.save();
 					logger.info("found session " + session);
 					request.contextPut(session, Session.class);
 				}				
