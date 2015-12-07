@@ -3,8 +3,9 @@ package com.rogervinas.testwebapp.model;
 public abstract class Session extends ActiveRecord<Session>
 {	
 	private User user;
-	private long expires = System.currentTimeMillis();
-	
+	private long creationTime = System.currentTimeMillis();
+	private int maxAge;
+
 	public Session(String id)
 	{
 		super(id);
@@ -20,32 +21,40 @@ public abstract class Session extends ActiveRecord<Session>
 		this.user = user;
 	}
 	
-	public void setExpires(long time) {
-		this.expires = time;
+	public long getCreationTime() {
+		return creationTime;
 	}
 	
-	public long getExpires() {
-		return this.expires;
+	public void resetCreationTime() {
+		setCreationTime(System.currentTimeMillis());
+	}
+	
+	public void setCreationTime(long time) {
+		this.creationTime = time;
+	}
+		
+	public int getMaxAge() {
+		return maxAge;
 	}
 	
 	/*
-	 * Sets session expiration time to now + <code>age</code> seconds
-	 * @param age time to add to expiration time in seconds
+	 * @param maxAge max age in seconds
 	 */
-	public void setMaxAge(long age) {
-		setExpires(System.currentTimeMillis() + age * 1000);
+	public void setMaxAge(int maxAge) {
+		this.maxAge = maxAge;
 	}
-	
+
 	public boolean hasExpired() {
-		return this.expires < System.currentTimeMillis();
+		return creationTime + maxAge*1000 < System.currentTimeMillis();
 	}
-	
+
 	public String toString() 
 	{
 		return getClass().getSimpleName() 
 				+ " { id:" + getId() 
 				+ " user:" + user
-				+ " expirationTime:" + expires
+				+ " creationTime:" + creationTime
+				+ " maxAge:" + maxAge
 				+ " }";
 	}
 }

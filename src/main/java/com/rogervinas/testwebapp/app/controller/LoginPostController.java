@@ -15,12 +15,20 @@ public class LoginPostController extends AbstractController
 {
 	//private final Logger logger = LoggerFactory.getLogger(LoginPostController.class);
 	
-	private final User nullUser;
-	private final Session nullSession;
+	private final User userTmp;
+	private final Session sessionTmp;
+	private int sessionMaxAge = 3600;
 	
-	public LoginPostController(User nullUser, Session nullSession) {
-		this.nullUser = nullUser;
-		this.nullSession = nullSession;
+	public LoginPostController(User userTmp, Session sessionTmp) {
+		this.userTmp = userTmp;
+		this.sessionTmp = sessionTmp;
+	}
+	
+	/*
+	 * @param maxAge max age in seconds
+	 */
+	public void setSessionMaxAge(int maxAge) {
+		this.sessionMaxAge = maxAge;
 	}
 	
 	@Override
@@ -29,15 +37,16 @@ public class LoginPostController extends AbstractController
 		HttpExchange exchange = request.getExchange();
 		PostParams params = request.contextGet(PostParams.class);
 		if(params == null) return false;
-		Session session = nullSession.create(UUID.randomUUID().toString());
+		Session session = sessionTmp.create(UUID.randomUUID().toString());
+		session.setMaxAge(sessionMaxAge);
 		String username = params.getProperty("user");
 		String password = params.getProperty("password");
-		User user = nullUser.load(username);
+		User user = userTmp.load(username);
 		TemplateValues values = new TemplateValues();					
 		if(user == null || !user.getPassword().equals(password)) {
 			values.put("redirect", params.getProperty("redirect"));
 			values.put("message", String.format("User %s not found or incorrect password", username));
-			LoginView.get().render(200, exchange, values);
+			LoginView.get().render(401, exchange, values);
 		} else {
 			session.setUser(user);
 			session.save();

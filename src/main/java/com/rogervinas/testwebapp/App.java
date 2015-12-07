@@ -13,6 +13,7 @@ import com.rogervinas.testwebapp.app.controller.NotFoundController;
 import com.rogervinas.testwebapp.app.controller.PageGetController;
 import com.rogervinas.testwebapp.app.route.ContextFilter;
 import com.rogervinas.testwebapp.app.route.Filter;
+import com.rogervinas.testwebapp.app.route.Mapper;
 import com.rogervinas.testwebapp.app.route.PageAuthorizedFilter;
 import com.rogervinas.testwebapp.app.route.PageFoundFilter;
 import com.rogervinas.testwebapp.app.route.PostParamsFilter;
@@ -44,11 +45,14 @@ public class App
 		
 		// Create controllers & filters
 		
-		Controller loginPostController = new LoginPostController(
+		LoginPostController loginPostController = new LoginPostController(
 				model.newUser(null), 
 				model.newSession(null)
 		);
 		
+		int sessionMaxAge = Integer.parseInt(System.getProperty("sessionMaxAge", "300"));
+		loginPostController.setSessionMaxAge(sessionMaxAge);
+				
 		Controller logoutPostController = new LogoutPostController();
 		
 		source.subscribe(new HeaderLogger());
@@ -57,13 +61,10 @@ public class App
 		Filter pageFound = new PageFoundFilter(model.newAccess(null));
 		Filter pageAuthorized = new PageAuthorizedFilter();
 		Filter pageNotAuthorized = pageAuthorized.not();
-		
+		Mapper sessionMapper = new SessionMapper(model.newSession(null));
 		Filter sessionFilter = new ContextFilter(Session.class);
 		Filter postParamsFilter = new PostParamsFilter();
-		
-		SessionMapper sessionMapper = new SessionMapper(model.newSession(null));
-		sessionMapper.setSessionMaxAge(5 * 60);
-		
+				
 		// Add routes
 		
 		source.filter(requestPending)
