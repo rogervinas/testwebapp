@@ -9,6 +9,7 @@ Following MVC each configured route will have a controller subscribed at the end
 
 For example a GET to an authorized page from an authenticated user will be:
 
+```
 ( -----R-----R--R-----R-----R-------R------R------|-> )
 . filter by method/path (GET *)
 . filter by page exists
@@ -16,6 +17,7 @@ For example a GET to an authorized page from an authenticated user will be:
 . filter by session (session exists? session is not expired?)
 . filter by authorization (extract user from session and check authorization)
 . subscribe to controller to render page
+```
 
 # build
 
