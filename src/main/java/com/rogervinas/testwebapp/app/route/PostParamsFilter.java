@@ -24,7 +24,7 @@ public class PostParamsFilter extends AbstractFilter
 	{
 		HttpExchange exchange = request.getExchange();
 		List<String> contentType = exchange.getRequestHeaders().get("Content-type");
-		if(contentType.size() > 0 && contentType.get(0).equals("application/x-www-form-urlencoded")) {
+		if(contentType != null && contentType.size() > 0 && contentType.get(0).equals("application/x-www-form-urlencoded")) {
 			if(request.contextGet(PostParams.class) == null) {
 				try(BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))) {
 					String urlencoded = reader.readLine();
