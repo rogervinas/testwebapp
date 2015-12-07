@@ -33,9 +33,9 @@ import com.rogervinas.testwebapp.server.Server;
 import com.rogervinas.testwebapp.server.ServerImpl;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class MainTest
+public class TestMain
 {
-	private static final Logger logger = LoggerFactory.getLogger(MainTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(TestMain.class);
 	
 	private static final int USERS_COUNT = 6;
 	private static final int USER_INDEX = USERS_COUNT / 2;
