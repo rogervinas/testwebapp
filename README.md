@@ -1,22 +1,21 @@
 # testwebapp
-Test Web Application using [com.sun.net.httpserver.HttpServer](https://docs.oracle.com/javase/8/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpServer.html) and [ReactiveX for Java](https://github.com/ReactiveX/RxJava)
 
-HttpServer handles requests by executing the HttpContext/HttpHandler configured for the requested path.
+This is a Test Web Application using [com.sun.net.httpserver.HttpServer](https://docs.oracle.com/javase/8/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpServer.html) and [ReactiveX for Java](https://github.com/ReactiveX/RxJava).
 
-In this TestWebApp a single HttpHandler is used which sends the HttpExchange via an RxJava Observable stream:
+The HttpServer handles requests by executing the HttpContext/HttpHandler configured for the requested path.
+This application uses a single HttpHandler and sends every request via a RxJava Observable stream.
+Then, following the MVC pattern, for each route there will be a controller subscribed at the end of the Observable stream, most likely with mapping and filtering in between.
 
-Following MVC each configured route will have a controller subscribed at the end of this Observable stream, with mapping and filtering in between.
-
-For example a GET to an authorized page from an authenticated user will be:
+Example of the GET/* route to serve pages to an authorized user:
 
 ```
 ( -----R-----R--R-----R-----R-------R------R------|-> )
-. filter by method/path (GET *)
-. filter by page exists
-. map session (extract session information from request)
-. filter by session (session exists? session is not expired?)
-. filter by authorization (extract user from session and check authorization)
-. subscribe to controller to render page
+.filter( method/path = GET/* )
+.filter( page exists )
+.map( if found, extract session from request )
+.filter( session exists and is not expired )
+.filter( session's user is authorized to access page )
+.subscribe( controller to serve page )
 ```
 
 # build
@@ -26,18 +25,24 @@ To build:
 ```
 $ git clone git@github.com:rogervinas/testwebapp
 $ cd testwebapp
-$ mvn install -DskipTests = true
+$ mvn install -DskipTests=true
 ```
 
 # test
 
-To test:
+To execute all tests:
 
 ```
 $ mvn test [-Dtest=testName]
 ```
 
-Where testName can be:
+To execute one test:
+
+```
+$ mvn test -Dtest=testName
+```
+
+Where testName can be one of the following:
 
 * TestMain: tests the basic cycle login / logout / page not found / page forbidden
 * TestSessionExpiration : sets the default expiration time to 5 seconds and tests if credentials are required once the session expires
