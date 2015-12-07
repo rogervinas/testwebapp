@@ -1,54 +1,44 @@
 package com.rogervinas.testwebapp.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
 
-public class User
+public abstract class User extends ActiveRecord<User>
 {
-	private String username;
-	private String name;
-	private Set<Role> roles = new HashSet<Role>(); 
+	private String password;
 	
-	public String getUsername()
+	public User(String id)
 	{
-		return username;
+		super(id);
 	}
 	
-	public void setUsername(String username) {
-		this.username = username;
-	}	
-	
-	public String getName()
+	public String getPassword() 
 	{
-		return name;
+		return password;
 	}
-
-	public void setName(String name)
-	{
-		this.name = name;
-	}	
 	
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setPassword(String password)
+	{
+		this.password = password;
 	}
+	
+	public abstract void addRoles(Role... roles);
+	public abstract Role[] getRoles();
 	
 	public boolean hasRole(Role role) {
-		return roles.contains(role);
-	}
-	
-	@Override
-	public boolean equals(Object obj)
-	{
-		if(obj instanceof User) {
-			return ((User) obj).username.equals(username);
-		} else {
-			return false;
+		for(Role role2 : getRoles()) {
+			if(role.equals(role2)) {
+				return true;
+			}
 		}
+		return false;
 	}
 	
-	@Override
-	public int hashCode() {
-		return username.hashCode();
-	}	
+	public String toString() 
+	{
+		return getClass().getSimpleName() 
+				+ " { id:" + getId() 
+				+ " roles:" + Arrays.toString(getRoles()) 
+				+ " }";
+	}
 }
 	

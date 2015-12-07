@@ -1,49 +1,36 @@
 package com.rogervinas.testwebapp.model;
 
-public class Access
+import java.util.Arrays;
+
+public abstract class Access extends ActiveRecord<Access>
 {
-	private String method;
-	private String path;
-	private Role role;
-	private boolean granted;
-		
-	public String getMethod()
+	public Access(String id)
 	{
-		return method;
-	}
-
-	public void setMethod(String method)
-	{
-		this.method = method;
-	}
-
-	public String getPath()
-	{
-		return path;
+		super(id);
 	}
 	
-	public void setPath(String path)
-	{
-		this.path = path;
+	public abstract void addRoles(Role... roles);	
+	public abstract Role[] getRoles();
+	
+	public boolean hasAccess(Role... roles) {
+		for(Role role1 : getRoles()) {
+			for(Role role2 : roles) {
+				if(role1.equals(role2)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
-	public Role getRole()
-	{
-		return role;
+	public boolean hasPublicAccess() {
+		return getRoles().length == 0;
 	}
 	
-	public void setRole(Role role)
-	{
-		this.role = role;
-	}
-
-	public boolean isGranted()
-	{
-		return granted;
-	}
-
-	public void setGranted(boolean granted)
-	{
-		this.granted = granted;
+	public String toString() {
+		return getClass().getSimpleName() 
+				+ "{ id:" + getId() 
+				+ " roles:" + Arrays.toString(getRoles()) 
+				+ " }";
 	}
 }

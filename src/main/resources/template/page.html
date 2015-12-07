@@ -1,0 +1,10 @@
+<html>
+	<body>
+	<h1>Page {{page}}</h1>
+	<p>Hello <b>{{user}}</b>, you are in <b>{{page}}</b></p>
+	<form action="/logout" method="post">
+		<input type="hidden" name="redirect" value="{{page}}">
+		<input type="submit" value="Logout">
+	</form>	
+	</body>
+</html>

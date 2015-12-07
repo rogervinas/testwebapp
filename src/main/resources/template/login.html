@@ -1,0 +1,14 @@
+<html>
+	<body>
+	<h1>{{header}}</h1>
+	<p>{{message}}</p>	
+	<form action="/login" method="post">
+		<input type="hidden" name="redirect" value="{{redirect}}">
+		<label for="user">User</label>
+		<input type="text" name="user">
+		<label for="password">Password</label>
+		<input type="password" name="password">
+		<input type="submit" value="Login">
+	</form>
+	</body>
+</html>
