@@ -15,10 +15,9 @@ public class NotFoundController extends AbstractController
 	protected boolean onNextImpl(ServerRequest request) throws IOException
 	{
 		HttpExchange exchange = request.getExchange();
-		exchange.sendResponseHeaders(404, 0);
 		TemplateValues values = new TemplateValues();
 		values.put("page", exchange.getRequestURI().getPath());
-		NotFoundView.get().render(exchange, values);
+		NotFoundView.get().render(404, exchange, values);
 		return true;				
 	}		
 }

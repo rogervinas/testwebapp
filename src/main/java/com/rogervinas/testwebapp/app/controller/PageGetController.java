@@ -21,8 +21,7 @@ public class PageGetController extends AbstractController
 		Session session = request.contextGet(Session.class);
 		values.put("user", session.getUser().getId());
 		values.put("page", path);
-		exchange.sendResponseHeaders(200, 0);
-		PageView.get().render(exchange, values);
+		PageView.get().render(200, exchange, values);
 		return true;				
 	}
 }

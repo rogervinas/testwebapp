@@ -20,16 +20,17 @@ public class LoginGetController extends AbstractController
 		String path = exchange.getRequestURI().getPath();
 		values.put("redirect", path);
 		Session session = request.contextGet(Session.class);
+		int status;
 		if(session != null) {
-			exchange.sendResponseHeaders(403, 0);
+			status = 403;
 			values.put("header", "Page forbidden");
 			values.put("message", String.format("User <b>%s</b> does not have access to <b>%s</b>, please request another page or login as another user", session.getUser().getId(), path));
 		} else {			
-			exchange.sendResponseHeaders(200, 0);
+			status = 200;
 			values.put("header", "Login page");
 			values.put("message", String.format("Please login to access <b>%s</b>", path));
 		}
-		LoginView.get().render(exchange, values);
+		LoginView.get().render(status, exchange, values);
 		return true;				
 	}
 }

@@ -37,8 +37,7 @@ public class LoginPostController extends AbstractController
 		if(user == null || !user.getPassword().equals(password)) {
 			values.put("redirect", params.getProperty("redirect"));
 			values.put("message", String.format("User %s not found or incorrect password", username));
-			exchange.sendResponseHeaders(200, 0);
-			LoginView.get().render(exchange, values);
+			LoginView.get().render(200, exchange, values);
 		} else {
 			session.setUser(user);
 			session.save();

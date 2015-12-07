@@ -13,10 +13,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,13 +27,13 @@ public class MainTest
 {
 	private static final Logger logger = LoggerFactory.getLogger(MainTest.class);
 	
-	private BasicCookieStore cookieStore;
-	private CloseableHttpClient httpclient;
-	private App app;
-	private String url;
+	private static BasicCookieStore cookieStore;
+	private static CloseableHttpClient httpclient;
+	private static App app;
+	private static String url;
 	
-	@Before
-	public void createHttpClient() throws IOException {
+	@BeforeClass
+	public static void createHttpClient() throws IOException {
 		cookieStore = new BasicCookieStore();
         httpclient = HttpClients.custom()
         		.setDefaultCookieStore(cookieStore)
@@ -65,6 +64,12 @@ public class MainTest
 		Assert.assertEquals(200, response.getStatusLine().getStatusCode());		
 	}
 	
+	@Test
+	public void testLogin() {
+		logHeader("Test Page without being logged in");
+		
+	}
+	
 	/*
 		for(int j=0; j<2; j++) {
 	        HttpGet httpget = new HttpGet("http://localhost:3000/page1");
@@ -91,13 +96,13 @@ public class MainTest
 		}
 	}*/
 	
-	@After
-	public void end() {
+	@AfterClass
+	public static void end() {
 		app.stop();
 	}
 	
 	private void logHeader(String name) {
-		logger.info("Test\n\n" + name + "\n\n");
+		logger.info("Test\n\n" + name + "\n");
 	}
 	
 	private void logResponse(HttpResponse response) throws IOException {

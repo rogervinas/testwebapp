@@ -47,9 +47,12 @@ public class TemplateView
 		}
 	}
 	
-	public void render(HttpExchange exchange, TemplateValues values) throws IOException {
+	public void render(int status, HttpExchange exchange, TemplateValues values) throws IOException {
+		byte[] content = render(values).getBytes();
+		exchange.getResponseHeaders().add("Content-Type", "text/html");		
+		exchange.sendResponseHeaders(status, content.length);
 		OutputStream stream = exchange.getResponseBody();
-		stream.write(render(values).getBytes());
+		stream.write(content);
 		stream.close();
 	}
 }
