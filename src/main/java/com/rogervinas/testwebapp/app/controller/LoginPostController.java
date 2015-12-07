@@ -51,7 +51,7 @@ public class LoginPostController extends AbstractController
 			session.setUser(user);
 			session.save();
 			exchange.getResponseHeaders().add("Location", params.getProperty("redirect"));
-			exchange.getResponseHeaders().add("Set-Cookie", "sessionId=" + session.getId());
+			exchange.getResponseHeaders().add("Set-Cookie", String.format("%s=%s", Session.class.getSimpleName(), session.getId()));
 			exchange.sendResponseHeaders(302, 0);
 		}
 		return true;

@@ -24,10 +24,14 @@ public class RouteFilter extends AbstractFilter
 	public Boolean call(ServerRequest request)
 	{
 		HttpExchange exchange = request.getExchange();
+		String method = exchange.getRequestMethod();
+		String path = exchange.getRequestURI().getPath();
 		boolean matches = 
-				methodPattern.matcher(exchange.getRequestMethod()).matches()
-				&& pathPattern.matcher(exchange.getRequestURI().getPath()).matches();
-		logger.info("ROUTE " + methodPattern + " " + pathPattern + " = " + matches);
+				methodPattern.matcher(method).matches()
+				&& pathPattern.matcher(path).matches();
+		if(matches) {
+			logger.info(String.format("Route %s %s applies", methodPattern, pathPattern));
+		}
 		return matches;
 	}
 }

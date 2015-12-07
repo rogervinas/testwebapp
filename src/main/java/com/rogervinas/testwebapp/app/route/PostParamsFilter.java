@@ -37,7 +37,8 @@ public class PostParamsFilter extends AbstractFilter
 						});
 					}
 				} catch(IOException e) {
-					logger.error("Parse post params", e);
+					logger.error("PostParamsFilter.call", e);
+					return false;
 				}
 			}
 			return true;

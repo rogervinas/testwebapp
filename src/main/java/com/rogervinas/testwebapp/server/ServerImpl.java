@@ -40,7 +40,7 @@ public class ServerImpl implements Server
 	public void start() {
 		logger.info("Starting ...");
 		server.start();
-		logger.info(String.format("Server listening on http://localhost:%d", server.getAddress().getPort()));
+		logger.info(String.format("Listening on http://localhost:%d", server.getAddress().getPort()));
 		logger.info("Started!");
 	}
 	

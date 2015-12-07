@@ -28,6 +28,7 @@ import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.rogervinas.testwebapp.model.Session;
 import com.rogervinas.testwebapp.server.Server;
 import com.rogervinas.testwebapp.server.ServerImpl;
 
@@ -71,7 +72,7 @@ public class MainTest
 	
 	@Test
 	public void test010PageNotFound() throws Exception {
-		log("Test Page not found");
+		log("Test 010: Page not found");
 		HttpGet httpget = new HttpGet(url + "/aaa/bbb/ccc");
 		CloseableHttpResponse response = httpclient.execute(httpget);
 		log(response);
@@ -80,7 +81,7 @@ public class MainTest
 	
 	@Test
 	public void test020PageWithoutBeingLoggedIn() throws Exception {
-		log("Test Page without being logged in");
+		log("Test 020: Page without being logged in");
 		String path = AppModelTest.getAccessId(1);
 		HttpGet httpget = new HttpGet(url + path);
 		CloseableHttpResponse response = httpclient.execute(httpget);
@@ -94,7 +95,7 @@ public class MainTest
 	
 	@Test
 	public void test030LoginFailUserNotFound() throws Exception {
-		log("Test Login with incorrect user");
+		log("Test 030: Login with incorrect user");
 		String user = "xxxx";
 		String password = "yyyy";
 		testLoginFail(user, password);
@@ -102,7 +103,7 @@ public class MainTest
 	
 	@Test
 	public void test040LoginFailWrongPassword() throws Exception {
-		log("Test Login with wrong password");
+		log("Test 040: Login with wrong password");
 		String user = USER_ID;
 		String password = "yyyy";
 		testLoginFail(user, password);
@@ -110,7 +111,7 @@ public class MainTest
 	
 	@Test
 	public void test050LoginSuccess() throws Exception {
-		log("Test Login success");
+		log("Test 050: Login success");
 		String user = USER_ID;
 		String password = USER_PASS;
 		String redirect = AppModelTest.getAccessId(1);
@@ -120,14 +121,14 @@ public class MainTest
 		log(responseContent);
 		assertStatusCode(response, 302);
 		assertHeader(response, "Location", redirect);
-		assertTrue("Cookie sessionId is set", getCookie("sessionId") != null);	
+		assertTrue("Cookie Session is set", getCookie(Session.class.getSimpleName()) != null);	
 	}
 	
 	@Test
 	public void test060PageAuthorized() throws Exception {
 		String user = USER_ID;
 		for(int i=1; i<=USER_INDEX; i++) {
-			log("Test Page authorized");
+			log(String.format("Test 060-%d: Page authorized", i));
 			String path = AppModelTest.getAccessId(i);
 			HttpGet httpget = new HttpGet(url + path);
 			CloseableHttpResponse response = httpclient.execute(httpget);
@@ -143,7 +144,7 @@ public class MainTest
 	
 	@Test
 	public void test070PageNotAuthorized() throws Exception {
-		log("Test Page not authorized");
+		log("Test 070: Page not authorized");
 		String user = USER_ID;			
 		String path = AppModelTest.getAccessId(USER_INDEX+1);
 		HttpGet httpget = new HttpGet(url + path);
@@ -159,7 +160,7 @@ public class MainTest
 	
 	@Test
 	public void test080Logout() throws Exception {
-		log("Test Logout");
+		log("Test 080: Logout");
 		String user = USER_ID;
 		HttpPost httppost = new HttpPost(url + "/logout");
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -171,11 +172,12 @@ public class MainTest
 		assertHeader(response, "Content-Type", "text/html");
 		assertContent(responseContent, "Logout Page");
 		assertContent(responseContent, String.format("User <b>%s</b> successfully logged out", user));
-		assertEquals("Cookie sessionId", "0", getCookie("sessionId").getValue());	
+		assertEquals("Cookie Session", "0", getCookie(Session.class.getSimpleName()).getValue());	
 	}	
 	
 	@Test
 	public void test090PageAfterLogout() throws Exception {
+		log("Test 090: Repeat Test 020");
 		test020PageWithoutBeingLoggedIn();
 	}
 	

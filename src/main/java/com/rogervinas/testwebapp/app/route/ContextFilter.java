@@ -25,11 +25,14 @@ public class ContextFilter extends AbstractFilter
 	@Override
 	public Boolean call(ServerRequest request)
 	{
-		boolean filter =
-				key == null
-				? request.contextGet(clazz) != null
-				: request.contextGet(key, clazz) != null;
-		logger.info("found " + clazz.getSimpleName() + "." + key + " = " + filter);
+		boolean filter;
+		if(key != null) {
+			filter = request.contextGet(key, clazz) != null;
+			logger.info(String.format("%s %s in context", key, filter ? "found" : "NOT found"));
+		} else {
+			filter = request.contextGet(clazz) != null;
+			logger.info(String.format("%s %s in context", clazz.getSimpleName(), filter ? "found" : "NOT found"));
+		}		
 		return filter;
 	}
 }

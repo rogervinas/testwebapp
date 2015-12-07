@@ -31,15 +31,15 @@ public class SessionMapper implements Mapper
 			if(session != null) {
 				if(session.hasExpired()) {
 					session.delete();
-					logger.info("session has expired " + session);
+					logger.info(String.format("Session %s has expired", session.getId()));
 				} else {
 					session.resetCreationTime();
 					session.save();
-					logger.info("found session " + session);
 					request.contextPut(session, Session.class);
+					logger.info(String.format("Session %s is valid", session.getId()));
 				}				
 			} else {
-				logger.info("session not found");
+				logger.info("Session not found in request");
 			}
 		}
 		return request;
@@ -53,7 +53,11 @@ public class SessionMapper implements Mapper
 				StringTokenizer tokenizer = new StringTokenizer(cookie, ";");
 				while(tokenizer.hasMoreTokens()) {
 					String[] nameValue = tokenizer.nextToken().split("=");
-					if(nameValue!=null && nameValue.length==2 && nameValue[0].trim().equals("sessionId")) {
+					if(
+							nameValue!=null 
+							&& nameValue.length==2 
+							&& nameValue[0].trim().equals(Session.class.getSimpleName())
+					) {
 						return nameValue[1].trim();
 					}
 				}

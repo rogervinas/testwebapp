@@ -25,13 +25,13 @@ public class GenericMemDb<T extends ActiveRecord<T>>
 	public void save(T elem)
 	{
 		elem = (T) elem.clone();
-		logger.info("save " + elem);
+		logger.info(String.format("Save %s %s", elem.getClass().getSimpleName(), elem.getId()));
 		elems.put(elem.getId(), elem);
 	}
 
 	public void delete(T elem)
 	{
-		logger.info("delete " + elem);
+		logger.info(String.format("Delete %s %s", elem.getClass().getSimpleName(), elem.getId()));
 		elems.remove(elem.getId());
 	}
 }

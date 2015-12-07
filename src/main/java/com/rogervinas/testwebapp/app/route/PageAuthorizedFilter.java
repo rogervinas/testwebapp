@@ -21,7 +21,7 @@ public class PageAuthorizedFilter extends AbstractFilter
 			pageAuthorized = getPageAuthorized(request); 
 			request.contextPut(contextKey, pageAuthorized);
 		}
-		logger.info("PageAuthorized: " + request.getExchange().getRequestURI().getPath() + " = " + pageAuthorized);
+		logger.info(String.format("Page %s is %s", request.getExchange().getRequestURI().getPath(), pageAuthorized ? "authorized" : "NOT authorized"));
 		return pageAuthorized;
 	}
 	

@@ -29,7 +29,7 @@ public class PageFoundFilter extends AbstractFilter
 			request.contextPut(access, Access.class);
 			request.contextPut(contextKey, pageFound);
 		}			
-		logger.info("PageFound: " + request.getExchange().getRequestURI().getPath() + " = " + pageFound);
+		logger.info(String.format("Page %s %s", request.getExchange().getRequestURI().getPath(), pageFound ? "found" : "NOT found"));
 		return pageFound;
 	}
 

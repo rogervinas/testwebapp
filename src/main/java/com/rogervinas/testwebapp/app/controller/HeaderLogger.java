@@ -28,11 +28,12 @@ public class HeaderLogger implements Observer<ServerRequest>
 	public void onNext(ServerRequest request)
 	{
 		HttpExchange exchange = request.getExchange();
-		logger.info(String.format("REQUEST %s %s", exchange.getRequestMethod(), exchange.getRequestURI().getPath()));
+		
+		logger.info(String.format("%s %s", exchange.getRequestMethod(), exchange.getRequestURI().getPath()));
 		exchange.getRequestHeaders().forEach((header, list) -> {
 			list.forEach(value -> {
-				logger.info("REQUEST header: " + header + " " + value);
+				logger.info(String.format("%s %s", header, value));
 			});						
-		});		
+		});
 	}
 }
