@@ -12,7 +12,7 @@ public abstract class AbstractController implements Controller
 	@Override
 	public void onCompleted()
 	{
-		logger.info("onCompleted");
+		logger.info(getClass().getSimpleName() + ".onCompleted");
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public abstract class AbstractController implements Controller
 		synchronized(request) {
 			if(!request.isDone()) {
 				try {
-					logger.info("onNext");
+					logger.info(getClass().getSimpleName() + ".onNext");
 					if(onNextImpl(request)) {
 						request.getExchange().close();
 						request.setDone();
