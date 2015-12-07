@@ -26,14 +26,16 @@ public class PostParamsFilter extends AbstractFilter
 		List<String> contentType = exchange.getRequestHeaders().get("Content-type");
 		if(contentType != null && contentType.size() > 0 && contentType.get(0).equals("application/x-www-form-urlencoded")) {
 			if(request.contextGet(PostParams.class) == null) {
+				PostParams params = new PostParams();
+				request.contextPut(params, PostParams.class);
 				try(BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))) {
 					String urlencoded = reader.readLine();
-					PostParams params = new PostParams();
-					request.contextPut(params, PostParams.class);
-					List<NameValuePair> list = URLEncodedUtils.parse(urlencoded, Charset.defaultCharset());
-					list.forEach(pair -> {
-						params.put(pair.getName(), pair.getValue());
-					});					
+					if(urlencoded != null && urlencoded.trim().length() > 0) {
+						List<NameValuePair> list = URLEncodedUtils.parse(urlencoded, Charset.defaultCharset());
+						list.forEach(pair -> {
+							params.put(pair.getName(), pair.getValue());
+						});
+					}
 				} catch(IOException e) {
 					logger.error("Parse post params", e);
 				}
