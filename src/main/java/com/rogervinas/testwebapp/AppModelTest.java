@@ -39,21 +39,21 @@ public class AppModelTest implements AppModel
 		
 	/*
 	 * Creates a test model in memory with:
-	 * - <code>num</code> users named USER_1, USER_2, ...
-	 * - <code>num</code> roles named PAGE_1, PAGE_2, ...
-	 * - <code>num</code> pages served on /page1, /page2, ...
+	 * - <code>count</code> users named USER_1, USER_2, ...
+	 * - <code>count</code> roles named PAGE_1, PAGE_2, ...
+	 * - <code>count</code> pages served on /page1, /page2, ...
 	 * - User USER_N has roles PAGE_1 to PAGE_N
 	 * - Users with role PAGE_N can access /pageN
 	 * @param num number of users/pages/roles to create
 	 */	
-	public AppModelTest(int num) {
+	public AppModelTest(int count) {
 		
-		IntStream.range(1, num)
+		IntStream.range(1, count)
 		.forEach(value -> {
 			newRole(getRoleId(value)).save();
 		});
 		
-		IntStream.range(1, num).forEach(value1 -> {
+		IntStream.range(1, count).forEach(value1 -> {
 			User user = newUser(getUserId(value1));
 			user.setPassword(getUserPass(value1));
 			IntStream.range(1, value1+1).forEach(value2 -> {
@@ -63,7 +63,7 @@ public class AppModelTest implements AppModel
 			user.save();
 		});
 
-		IntStream.range(1, num)
+		IntStream.range(1, count)
 		.forEach(value -> {
 			Role role = newRole(getRoleId(value)).load();
 			Access access = newAccess(getAccessId(value));
