@@ -9,6 +9,7 @@
 		Test Web Application using com.sun.net.httpserver.HttpServer
 	</description>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<java.main.class>com.rogervinas.testwebapp.Main</java.main.class>
 		<github.repo>rogervinas/testwebapp</github.repo>		
