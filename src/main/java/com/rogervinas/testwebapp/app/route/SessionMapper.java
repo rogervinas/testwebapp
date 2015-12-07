@@ -31,6 +31,7 @@ public class SessionMapper implements Mapper
 			if(session != null) {
 				if(session.hasExpired()) {
 					session.delete();
+					exchange.getResponseHeaders().add("Set-Cookie", String.format("%s=0", Session.class.getSimpleName(), session.getId()));
 					logger.info(String.format("Session %s has expired", session.getId()));
 				} else {
 					session.resetCreationTime();

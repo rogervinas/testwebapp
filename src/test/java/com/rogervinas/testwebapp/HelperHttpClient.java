@@ -60,5 +60,5 @@ public class HelperHttpClient
 			} while(line != null);
 		}	
 		return buffer.toString().trim();
-	}	
+	}
 }

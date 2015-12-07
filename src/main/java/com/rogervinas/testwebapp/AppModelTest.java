@@ -48,12 +48,12 @@ public class AppModelTest implements AppModel
 	 */	
 	public AppModelTest(int count) {
 		
-		IntStream.range(1, count)
+		IntStream.range(1, count+1)
 		.forEach(value -> {
 			newRole(getRoleId(value)).save();
 		});
 		
-		IntStream.range(1, count).forEach(value1 -> {
+		IntStream.range(1, count+1).forEach(value1 -> {
 			User user = newUser(getUserId(value1));
 			user.setPassword(getUserPass(value1));
 			IntStream.range(1, value1+1).forEach(value2 -> {
@@ -63,7 +63,7 @@ public class AppModelTest implements AppModel
 			user.save();
 		});
 
-		IntStream.range(1, count)
+		IntStream.range(1, count+1)
 		.forEach(value -> {
 			Role role = newRole(getRoleId(value)).load();
 			Access access = newAccess(getAccessId(value));
