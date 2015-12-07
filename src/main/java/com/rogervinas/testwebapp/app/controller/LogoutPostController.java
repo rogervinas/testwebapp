@@ -23,7 +23,7 @@ public class LogoutPostController extends AbstractController
 		Session session = request.contextGet(Session.class);
 		session.delete();
 		exchange.getResponseHeaders().add("Set-Cookie", "sessionId=0");
-		values.put("message", String.format("User %s successfully logout", session.getUser().getId()));
+		values.put("message", String.format("User <b>%s</b> successfully logged out", session.getUser().getId()));
 		LogoutView.get().render(200, exchange, values);
 		return true;					
 	}
