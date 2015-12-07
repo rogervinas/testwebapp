@@ -15,7 +15,7 @@ import com.rogervinas.testwebapp.model.Session;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestSessionExpiration extends TestGeneric
 {
-	private static final Logger logger = LoggerFactory.getLogger(TestMain.class);
+	private static final Logger logger = LoggerFactory.getLogger(TestSessionExpiration.class);
 	
 	private static final int USERS_COUNT = 2;
 	private static final int USER_INDEX = USERS_COUNT;
