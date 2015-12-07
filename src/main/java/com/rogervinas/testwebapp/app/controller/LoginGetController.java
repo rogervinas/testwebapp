@@ -23,7 +23,7 @@ public class LoginGetController extends AbstractController
 		int status;
 		if(session != null) {
 			status = 403;
-			values.put("header", "Page forbidden");
+			values.put("header", "Page Forbidden");
 			values.put("message", String.format("User <b>%s</b> does not have access to <b>%s</b>, please request another page or login as another user", session.getUser().getId(), path));
 		} else {			
 			status = 200;

@@ -9,9 +9,8 @@ public class HelperApp
 	private final String url;
 	private final App app;
 	
-	public HelperApp(int usersCount) throws Exception {
-		this.usersCount = usersCount;
-		int port = Integer.parseInt(System.getProperty("port", "8081"));
+	public HelperApp(int port, int usersCount) throws Exception {
+		this.usersCount = usersCount;		
 	    Server server = new ServerImpl(port, 5);
 	    this.url = String.format("http://localhost:%d/", port);
 	    AppModel model = new AppModelTest(usersCount);
@@ -22,7 +21,7 @@ public class HelperApp
 		app.start();
 	}
 	
-	public void stop() {
+	public void stop() throws Exception {
 		app.stop();
 	}
 

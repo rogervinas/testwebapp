@@ -45,10 +45,10 @@ public class ServerImpl implements Server
 	}
 	
 	public void stop(int delay) {
-		logger.info("Stopping ...");		
+		logger.info("Stopping ...");	
 		listeners.forEach(listener -> listener.onStop());
 		server.stop(delay);
-		logger.info("Stopped ...");		
+		logger.info("Stopped");		
 	}
 	
 	public Observable<ServerRequest> observe() {

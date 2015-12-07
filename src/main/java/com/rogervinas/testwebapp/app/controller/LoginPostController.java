@@ -45,6 +45,7 @@ public class LoginPostController extends AbstractController
 		TemplateValues values = new TemplateValues();					
 		if(user == null || !user.getPassword().equals(password)) {
 			values.put("redirect", params.getProperty("redirect"));
+			values.put("header", "Login Page");
 			values.put("message", String.format("User %s not found or incorrect password", username));
 			LoginView.get().render(401, exchange, values);
 		} else {
