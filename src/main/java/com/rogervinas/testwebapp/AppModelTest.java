@@ -21,6 +21,22 @@ public class AppModelTest implements AppModel
 	private final GenericMemDb<Access> accessDb = new GenericMemDb<Access>();
 	private final GenericMemDb<Session> sessionDb = new GenericMemDb<Session>();
 	
+	public static String getUserId(int i) {
+		return String.format("USER_%d", i);		
+	}
+	
+	public static String getUserPass(int i) {
+		return String.format("pass%d", i);		
+	}	
+
+	public static String getRoleId(int i) {
+		return String.format("PAGE_%d", i);		
+	}
+
+	public static String getAccessId(int i) {
+		return String.format("/page%d", i);		
+	}
+		
 	/*
 	 * Creates a test model in memory with:
 	 * - <code>num</code> users named USER_1, USER_2, ...
@@ -31,21 +47,17 @@ public class AppModelTest implements AppModel
 	 * @param num number of users/pages/roles to create
 	 */	
 	public AppModelTest(int num) {
-				
-		String userFormat = "USER_%d";		
-		String roleFormat = "PAGE_%d";
-		String pageFormat = "/page%d";
 		
 		IntStream.range(1, num)
 		.forEach(value -> {
-			newRole(String.format(roleFormat,value)).save();
+			newRole(getRoleId(value)).save();
 		});
 		
 		IntStream.range(1, num).forEach(value1 -> {
-			User user = newUser(String.format(userFormat,value1));
-			user.setPassword(String.format("pass%d", value1));
+			User user = newUser(getUserId(value1));
+			user.setPassword(getUserPass(value1));
 			IntStream.range(1, value1+1).forEach(value2 -> {
-				Role role = newRole(String.format(roleFormat,value2)).load();
+				Role role = newRole(getRoleId(value2)).load();
 				user.addRoles(role);
 			});
 			user.save();
@@ -53,8 +65,8 @@ public class AppModelTest implements AppModel
 
 		IntStream.range(1, num)
 		.forEach(value -> {
-			Role role = newRole(String.format(roleFormat,value)).load();
-			Access access = newAccess(String.format(pageFormat,value));
+			Role role = newRole(getRoleId(value)).load();
+			Access access = newAccess(getAccessId(value));
 			access.addRoles(role);
 			access.save();
 		});		
