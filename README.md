@@ -41,10 +41,13 @@ So for example, **USER_3**:
 
 # build
 
-Using Apache Maven:
-
 ```
-$ git clone https://github.com/rogervinas/testwebapp.git
+# using https
+$ git clone --branch test-web-application-1.0.0 https://github.com/rogervinas/testwebapp.git
+
+# using ssh
+$ git clone --branch test-web-application-1.0.0 git@github.com:rogervinas/testwebapp.git
+
 $ cd testwebapp
 $ mvn install -DskipTests=true
 ```
