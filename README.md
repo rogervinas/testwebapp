@@ -58,7 +58,7 @@ Using Java 8 or higher:
 
 ```
 $ cd testwebapp/target
-$ java [options] -jar test-web-application-1.0.1-SNAPSHOT-standalone.jar
+$ java [options] -jar test-web-application-1.0.0-standalone.jar
 ```
 
 Options:
