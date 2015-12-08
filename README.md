@@ -41,13 +41,16 @@ So for example, **USER_3**:
 
 # build
 
+To clone repository via https:
 ```
-# using https
 $ git clone --branch test-web-application-1.0.0 https://github.com/rogervinas/testwebapp.git
-
-# using ssh
+```
+To clone repository via ssh:
+```
 $ git clone --branch test-web-application-1.0.0 git@github.com:rogervinas/testwebapp.git
-
+```
+To Build:
+```
 $ cd testwebapp
 $ mvn install -DskipTests=true
 ```
