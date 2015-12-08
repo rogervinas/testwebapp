@@ -16,6 +16,8 @@ Example of the GET route to serve pages to an authorized user:
 .filter( session exists and is not expired )
 .filter( session's user is authorized to access page )
 .subscribe( controller to serve page )
+
+where R = one HTTP Request
 ```
 
 # model
