@@ -64,7 +64,7 @@ Options:
 -DsessionMaxAge=<value>  : session max age in seconds (by default 5 minutes)
 ```
 
-Using default parameters, once started the web application is available at [http://localhost:8080](http://localhost:8080)
+Using default parameters, once started the web application should be available at [http://localhost:8080](http://localhost:8080)
 
 # test
 
