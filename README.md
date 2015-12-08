@@ -54,6 +54,7 @@ $ mvn install -DskipTests=true
 Using Java 8 or higher:
 
 ```
+$ cd testwebapp/target
 $ java [options] -jar test-web-application-<version>-standalone.jar
 ```
 
