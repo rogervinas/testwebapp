@@ -46,6 +46,7 @@ Using Apache Maven:
 ```
 $ git clone https://github.com/rogervinas/testwebapp.git
 $ cd testwebapp
+$ git checkout tags/test-web-application-1.0.0
 $ mvn install -DskipTests=true
 ```
 
@@ -55,7 +56,7 @@ Using Java 8 or higher:
 
 ```
 $ cd testwebapp/target
-$ java [options] -jar test-web-application-<version>-standalone.jar
+$ java [options] -jar test-web-application-1.0.0-standalone.jar
 ```
 
 Options:
@@ -65,7 +66,7 @@ Options:
 -DsessionMaxAge=<value>  : session max age in seconds (by default 5 minutes)
 ```
 
-Using default parameters, once started the web application should be available at [http://localhost:8080](http://localhost:8080)
+Using default options, once started the web application should be available at [http://localhost:8080](http://localhost:8080)
 
 # test
 
