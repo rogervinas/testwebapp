@@ -47,7 +47,7 @@ public class TestConcurrency extends TestGeneric
 			Throwable e = futures[i].get();
 			HelperAssert.assertTrue(
 					String.format("Client Test %d/%d %s", 
-							i,
+							i+1,
 							count,
 							e == null ? "OK" : "ERROR " + e.getMessage()
 					),
