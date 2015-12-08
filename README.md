@@ -44,7 +44,7 @@ So for example, **USER_3**:
 Using Apache Maven:
 
 ```
-$ git clone git@github.com:rogervinas/testwebapp
+$ git clone https://github.com/rogervinas/testwebapp.git
 $ cd testwebapp
 $ mvn install -DskipTests=true
 ```
