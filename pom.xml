@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>rogervinas</groupId>
 	<artifactId>test-web-application</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Test Web Application</name>
 	<description>
 		Test Web Application using com.sun.net.httpserver.HttpServer
@@ -23,7 +22,7 @@
 		<connection>scm:git:git@github.com:${github.repo}</connection>
 		<url>scm:git:git@github.com:${github.repo}</url>
 		<developerConnection>scm:git:git@github.com:${github.repo}</developerConnection>
-		<tag>HEAD</tag>
+		<tag>test-web-application-1.0.0</tag>
 	</scm>
 	<distributionManagement>
 		<repository>
