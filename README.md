@@ -6,7 +6,7 @@
 * Each route is configured with a **controller** subscribed at the end of the [**Observable Stream**](http://reactivex.io/RxJava/javadoc/rx/Observable.html). 
 * Like most web application frameworks the **MVC** pattern is used.
 
-Example of the GET route to serve pages to an authorized user:
+Example of the GET route to serve pages to an authorized user, being each R one HTTP request:
 
 ```
 ( -----R-----R--R-----R-----R-------R------R------|-> )
@@ -16,8 +16,6 @@ Example of the GET route to serve pages to an authorized user:
 .filter( session exists and is not expired )
 .filter( session's user is authorized to access page )
 .subscribe( controller to serve page )
-
-where R = one HTTP Request
 ```
 
 # model
