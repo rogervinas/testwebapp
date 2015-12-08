@@ -43,11 +43,11 @@ So for example, **USER_3**:
 
 To clone repository via https:
 ```
-$ git clone --branch test-web-application-1.0.0 https://github.com/rogervinas/testwebapp.git
+$ git clone --branch master https://github.com/rogervinas/testwebapp.git
 ```
 To clone repository via ssh:
 ```
-$ git clone --branch test-web-application-1.0.0 git@github.com:rogervinas/testwebapp.git
+$ git clone --branch master git@github.com:rogervinas/testwebapp.git
 ```
 To Build:
 ```
@@ -61,7 +61,7 @@ Using Java 8 or higher:
 
 ```
 $ cd testwebapp/target
-$ java [options] -jar test-web-application-1.0.0-standalone.jar
+$ java [options] -jar test-web-application-1.0.1-SNAPSHOT-standalone.jar
 ```
 
 Options:
