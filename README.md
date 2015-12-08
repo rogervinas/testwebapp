@@ -46,7 +46,7 @@ Using Apache Maven:
 ```
 $ git clone https://github.com/rogervinas/testwebapp.git
 $ cd testwebapp
-$ git checkout tags/test-web-application-1.0.0
+$ git checkout tags/test-web-application-1.0.1-SNAPSHOT
 $ mvn install -DskipTests=true
 ```
 
@@ -56,7 +56,7 @@ Using Java 8 or higher:
 
 ```
 $ cd testwebapp/target
-$ java [options] -jar test-web-application-1.0.0-standalone.jar
+$ java [options] -jar test-web-application-1.0.1-SNAPSHOT-standalone.jar
 ```
 
 Options:
