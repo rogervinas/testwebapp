@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>rogervinas</groupId>
 	<artifactId>test-web-application</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Test Web Application</name>
 	<description>
 		Test Web Application using com.sun.net.httpserver.HttpServer
@@ -22,7 +22,7 @@
 		<connection>scm:git:git@github.com:${github.repo}</connection>
 		<url>scm:git:git@github.com:${github.repo}</url>
 		<developerConnection>scm:git:git@github.com:${github.repo}</developerConnection>
-		<tag>HEAD</tag>
+		<tag>test-web-application-1.0.0</tag>
 	</scm>
 	<distributionManagement>
 		<repository>
