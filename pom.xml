@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>rogervinas</groupId>
 	<artifactId>test-web-application</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>Test Web Application</name>
 	<description>
 		Test Web Application using com.sun.net.httpserver.HttpServer
