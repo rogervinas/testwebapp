@@ -1,26 +1,47 @@
 # testwebapp
 
-This is a Test Web Application using [com.sun.net.httpserver.HttpServer](https://docs.oracle.com/javase/8/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpServer.html) and [ReactiveX for Java](https://github.com/ReactiveX/RxJava).
+**testwebapp** is a web app developed with [**HttpServer**](https://docs.oracle.com/javase/8/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpServer.html) and [**ReactiveX for Java**](https://github.com/ReactiveX/RxJava):
 
-The HttpServer handles requests by executing the HttpContext/HttpHandler configured for the requested path.
-This application uses a single HttpHandler and sends every request via a RxJava Observable stream.
-Then, following the MVC pattern, for each route there will be a controller subscribed at the end of the Observable stream, most likely with mapping and filtering in between.
+* A single [**HttpHandler**](https://docs.oracle.com/javase/8/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpHandler.html) is registered to the root path **/** and publishes every request to an [**Observable Stream**](http://reactivex.io/RxJava/javadoc/rx/Observable.html).
+* Each route is configured with a **controller** subscribed at the end of the [**Observable Stream**](http://reactivex.io/RxJava/javadoc/rx/Observable.html). 
+* Like most web application frameworks the **MVC** pattern is used.
 
-Example of the GET/* route to serve pages to an authorized user:
+Example of the GET route to serve pages to an authorized user:
 
 ```
 ( -----R-----R--R-----R-----R-------R------R------|-> )
 .filter( method/path = GET/* )
 .filter( page exists )
-.map( if found, extract session from request )
+.map( extract session from request, if found )
 .filter( session exists and is not expired )
 .filter( session's user is authorized to access page )
 .subscribe( controller to serve page )
 ```
 
+# model
+
+The abstract model uses **ActiveRecord** pattern and only a **In-Memory** implementation is provided. Other future implementations could use a proper **Database**. 
+
+The following data is loaded:
+
+* 10 roles named PAGE_1, PAGE_2, ..., PAGE_10. 
+* 10 pages with path /page1, /page2, ..., /page10.
+* 10 users named USER_1, USER_2, ..., USER_10.
+* USER_**i** has:
+	* password pass**i**
+	* roles PAGE_1, PAGE_2, ..., PAGE_**i**
+* Users with role PAGE_**i** have access to /page**i**.
+
+So for example, **USER_3**:
+
+* Has password pass3.
+* Has roles PAGE_1, PAGE_2 and PAGE_3.
+* Can access to /page1, /page2 and /page3.
+* Cannot access to /page4, /page5, ..., /page10.
+
 # build
 
-To build:
+Using Apache Maven:
 
 ```
 $ git clone git@github.com:rogervinas/testwebapp
@@ -28,22 +49,39 @@ $ cd testwebapp
 $ mvn install -DskipTests=true
 ```
 
+# run
+
+Using Java 8 or higher:
+
+```
+$ java [options] -jar test-web-application-<version>-standalone.jar
+```
+
+Options:
+
+```
+-Dport=<port>            : port to bind HTTP server (by default 8080)
+-DsessionMaxAge=<value>  : session max age in seconds (by default 5 minutes)
+```
+
+Once started the web application is available at http://localhost:8080
+
 # test
 
 To execute all tests:
 
 ```
-$ mvn test [-Dtest=testName]
+$ mvn test
 ```
 
-To execute one test:
+To execute one particular test:
 
 ```
-$ mvn test -Dtest=testName
+$ mvn test -Dtest=<TestClass>
 ```
 
-Where testName can be one of the following:
+TestClass:
 
-* TestMain: tests the basic cycle login / logout / page not found / page forbidden
-* TestSessionExpiration : sets the default expiration time to 5 seconds and tests if credentials are required once the session expires
-* TestConcurrency : tests the basic cycle for multiple clients connected at once
+* **TestMain**: single client executing basic test cases (login, logout, page not found, page forbidden, ...).
+* **TestSessionExpiration** : sessionMaxAge set to 5 seconds to validate session expiration.
+* **TestConcurrency** : multiple clients executing basic test cases at the same time.
