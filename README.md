@@ -1,4 +1,5 @@
 [![CI](https://github.com/rogervinas/testwebapp/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/rogervinas/testwebapp/actions/workflows/maven.yml)
+[![CodeQL](https://github.com/rogervinas/testwebapp/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/rogervinas/testwebapp/actions/workflows/codeql-analysis.yml)
 
 # testwebapp
 
