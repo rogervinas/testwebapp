@@ -1,3 +1,5 @@
+[![CI](https://github.com/rogervinas/testwebapp/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/rogervinas/testwebapp/actions/workflows/maven.yml)
+
 # testwebapp
 
 **testwebapp** is a web app developed with [**HttpServer**](https://docs.oracle.com/javase/8/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpServer.html) and [**ReactiveX for Java**](https://github.com/ReactiveX/RxJava):
